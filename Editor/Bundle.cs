@@ -42,40 +42,45 @@ public class Bundle : EditorWindow {
             EditorUtility.DisplayDialog("No Input", "The input directory does not exist!", "OK");
             return;
         }
+        
+        foreach (string fileName in Directory.GetFiles(inputDirectory)) {
+            if (Path.GetExtension(fileName) == ".cs") {
+                string newFileName = fileName.Substring(0, fileName.Length - Path.GetFileName(fileName).Length) + Path.GetFileNameWithoutExtension(fileName) + ".cs.txt";
+                File.Copy(fileName, newFileName);
+            }
+        }
+
         BuildBundle(BuildTarget.StandaloneWindows);
         string[] fileEntries = BuildBundle(BuildTarget.Android);
         
         foreach (string fileName in fileEntries) {
             if (fileName.Length>7 && fileName.Substring(fileName.Length-7) == ".cs.txt") {
-                File.Move(fileName, fileName.Substring(0, fileName.Length - 7) + ".cs");
+                File.Delete(fileName);
             }
         }
         if (deleteManifests) {
             string[] newFileEntries = Directory.GetFiles(outputDirectory);
             foreach (string fileName in newFileEntries) {
-                if(Path.GetExtension(fileName) == ".manifest" || Path.GetFileName(fileName) == "Output") {
+                if (fileName.Substring(fileName.Length - 9) == ".manifest" ||
+                    Path.GetFileName(fileName) == "Output" ||
+                    Path.GetFileName(fileName) == "Output.meta" ||
+                    fileName.Substring(fileName.Length - 14) == ".manifest.meta") {
                     File.Delete(fileName);
                 }
             }
         }
-        EditorUtility.DisplayDialog("Done", "Asset bundles completed OK!", "Close");
-        Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(outputDirectory+"/"+outputName);
+        Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(outputDirectory + "/" + outputName);
         EditorGUIUtility.PingObject(Selection.activeObject);
     }
 
     string[] BuildBundle(BuildTarget target) {
         string[] fileEntries = Directory.GetFiles(inputDirectory);
         foreach (string fileName in fileEntries) {
-            AssetImporter asset;
-            if (Path.GetExtension(fileName) == ".cs") {
-                string newFileName = fileName.Substring(0, fileName.Length - Path.GetFileName(fileName).Length) + Path.GetFileNameWithoutExtension(fileName) + ".cs.txt";
-                File.Move(fileName, newFileName);
-                asset = AssetImporter.GetAtPath(newFileName);
-            } else {
-                asset = AssetImporter.GetAtPath(fileName);
-            }
-            if (asset != null) {
-                asset.SetAssetBundleNameAndVariant(target == BuildTarget.StandaloneWindows? outputName : outputName+"_android", "");
+            if (Path.GetExtension(fileName) != ".cs") {
+                AssetImporter asset = AssetImporter.GetAtPath(fileName);
+                if (asset != null) {
+                    asset.SetAssetBundleNameAndVariant(target == BuildTarget.StandaloneWindows ? outputName : outputName + "_android", "");
+                }
             }
         }
         if (!Directory.Exists(outputDirectory)) {
