@@ -1,3 +1,9 @@
+
+
+
+# What Is This?
+This is unity plugin for use with the social VR platform - The Expanse. The Expanse is a metaverse style VR game with integrated content creation tools and support for loading in 3d models and unity asset bundles.
+
 # ExpanseBundler
 Create asset bundles for The Expanse at the click of a button - scripts and normal assets!
 
