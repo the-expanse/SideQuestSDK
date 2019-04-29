@@ -47,6 +47,7 @@ public class Bundle : EditorWindow {
             if (Path.GetExtension(fileName) == ".cs") {
                 string newFileName = fileName.Substring(0, fileName.Length - Path.GetFileName(fileName).Length) + Path.GetFileNameWithoutExtension(fileName) + ".cs.txt";
                 File.Copy(fileName, newFileName);
+                AssetDatabase.Refresh();
             }
         }
 
@@ -71,6 +72,7 @@ public class Bundle : EditorWindow {
         }
         Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(outputDirectory + "/" + outputName);
         EditorGUIUtility.PingObject(Selection.activeObject);
+        AssetDatabase.Refresh();
     }
 
     string[] BuildBundle(BuildTarget target) {
@@ -79,6 +81,7 @@ public class Bundle : EditorWindow {
             if (Path.GetExtension(fileName) != ".cs") {
                 AssetImporter asset = AssetImporter.GetAtPath(fileName);
                 if (asset != null) {
+                    Debug.Log(fileName);
                     asset.SetAssetBundleNameAndVariant(target == BuildTarget.StandaloneWindows ? outputName : outputName + "_android", "");
                 }
             }
