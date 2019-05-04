@@ -21,9 +21,15 @@ How do I use this plugin?
    - Remove Manifests: This option will automatically remove the extra manifest files and leave 
      you with just the two asset bundle files for desktop and android.
  ![Input Options](https://i.imgur.com/WyYAPOP.png)
+ 
+How do I use the asset bundles I export?
+ - Once you have created your bundle files you will need to upload them to some publically accessible url so you can then load them into The Expanse. You can use github or similar or use your own server for hosting the files. 
+![Demo](https://raw.githubusercontent.com/the-expanse/ExpanseAsset/master/demo.gif)
      
 Where can I get support for this plugin?
  - To ask questions or raise concerns you can use github issues or engage directly with us on our 
  [discord](https://discord.gg/xJ3M63W) or via our [website](https://theexpanse.app/support/).
+ 
+ 
   
  
