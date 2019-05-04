@@ -1,13 +1,13 @@
 # Expanse Bundler
 
-What is this for? 
+#### What is this for? 
  - The expanse is a social VR platform that allows you to create custom content and game logic. 
  This editor plugin is intended to simplify the process of loading new content into The Expanse 
  by prepping and creating asset bundles for both desktop and android in one simple step. This 
  plugin will process your assets and scripts from a selected input folder and add them into the
  asset bundles before exporting. 
  
-How do I use this plugin?
+#### How do I use this plugin?
  - To access this plugin you need to click the `Tools` menu and then click `Expanse Bundler`.
  ![Menu Location](https://i.imgur.com/eYomakv.png)
  - The plugin provides 4 input options.
@@ -22,11 +22,11 @@ How do I use this plugin?
      you with just the two asset bundle files for desktop and android.
  ![Input Options](https://i.imgur.com/WyYAPOP.png)
  
-How do I use the asset bundles I export?
+#### How do I use the asset bundles I export?
  - Once you have created your bundle files you will need to upload them to some publically accessible url so you can then load them into The Expanse. You can use github or similar or use your own server for hosting the files. 
 ![Demo](https://raw.githubusercontent.com/the-expanse/ExpanseAsset/master/demo.gif)
      
-Where can I get support for this plugin?
+#### Where can I get support for this plugin?
  - To ask questions or raise concerns you can use github issues or engage directly with us on our 
  [discord](https://discord.gg/xJ3M63W) or via our [website](https://theexpanse.app/support/).
  
