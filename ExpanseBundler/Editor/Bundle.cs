@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Bundle : EditorWindow {
 
-    string inputDirectory = "Assets/AssetBundles/Input";
-    string outputDirectory = "Assets/AssetBundles/Output";
+    string inputDirectory = "Assets/ExpanseBundler/AssetBundles/Input";
+    string outputDirectory = "Assets/ExpanseBundler/AssetBundles/Output";
     string outputName = "my_bundle";
     bool deleteManifests = true;
 
@@ -81,7 +81,6 @@ public class Bundle : EditorWindow {
             if (Path.GetExtension(fileName) != ".cs") {
                 AssetImporter asset = AssetImporter.GetAtPath(fileName);
                 if (asset != null) {
-                    Debug.Log(fileName);
                     asset.SetAssetBundleNameAndVariant(target == BuildTarget.StandaloneWindows ? outputName : outputName + "_android", "");
                 }
             }
