@@ -1,7 +1,7 @@
 # Expanse Bundler
 
 #### What is this for? 
- - The expanse is a social VR platform that allows you to create custom content and game logic. 
+ - The Expanse is a social VR platform that allows you to create custom content and game logic. 
  This editor plugin is intended to simplify the process of loading new content into The Expanse 
  by prepping and creating asset bundles for both desktop and android in one simple step. This 
  plugin will process your assets and scripts from a selected input folder and add them into the
