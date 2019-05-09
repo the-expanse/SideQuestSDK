@@ -42,20 +42,26 @@ public class Bundle : EditorWindow {
             EditorUtility.DisplayDialog("No Input", "The input directory does not exist!", "OK");
             return;
         }
-        
+       // BuildReferences.ResetReferences();
         foreach (string fileName in Directory.GetFiles(inputDirectory)) {
-            if (Path.GetExtension(fileName) == ".cs") {
-                string newFileName = fileName.Substring(0, fileName.Length - Path.GetFileName(fileName).Length) + Path.GetFileNameWithoutExtension(fileName) + ".cs.txt";
-                File.Copy(fileName, newFileName);
-                AssetDatabase.Refresh();
+            switch (Path.GetExtension(fileName)) {
+                case ".cs":
+                    string newFileName = fileName.Substring(0, fileName.Length - Path.GetFileName(fileName).Length) + Path.GetFileNameWithoutExtension(fileName) + ".cs.txt";
+                    File.Copy(fileName, newFileName);
+                    break;
+                case ".prefab":
+                   // BuildReferences.Scan(fileName); //inputDirectory + "/" + 
+                    break;
             }
         }
 
+        AssetDatabase.Refresh();
+
         BuildBundle(BuildTarget.StandaloneWindows);
         string[] fileEntries = BuildBundle(BuildTarget.Android);
-        
+
         foreach (string fileName in fileEntries) {
-            if (fileName.Length>7 && fileName.Substring(fileName.Length-7) == ".cs.txt") {
+            if (fileName.Length > 7 && fileName.Substring(fileName.Length - 7) == ".cs.txt") {
                 File.Delete(fileName);
             }
         }
